@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<style>
+    * {
+        margin: 0px;
+        padding: 0px;
+    }
+
+    body {
+        background-color: #009bce;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        font-size: 1.2rem;
+        color: #333;
+        display: flex;
+        flex-direction: column;
+        /* justify-content: center; */
+        align-items: center;
+        height: 100vh;
+    }
+
+    body h1 {
+        margin: 20px 0px;
+    }
+
+    .tipcont {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-wrap: wrap;
+    }
+
+    .form {
+
+        background-color: rgba(0, 0, 0, 0.396);
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        padding: 20px;
+        border-radius: 20px;
+        color: white;
+    }
+
+    .form label {
+        align-self: flex-start;
+        margin-left: 10px;
+        font-size: 16px;
+    }
+
+    input {
+        width: 95%;
+        padding: 10px;
+        border-radius: 15px;
+        border: none;
+        margin: 10px 0px;
+        outline: none;
+        align-self: center;
+    }
+
+    .tippercentout {
+        width: 95%;
+        background-color: black;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        padding: 10px;
+        border-radius: 15px;
+    }
+
+    .tippercentout .head {
+        font-size: 20px;
+    }
+
+    .tippercentin {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-around;
+        width: 100%;
+        padding: 10px 0px;
+    }
+
+    .tippercentin p {
+        width: 15%;
+        background-color: rgb(139, 139, 139);
+        padding: 10px;
+        margin: 5px 0px;
+        border-radius: 20px;
+        color: #333;
+        text-align: center;
+    }
+
+    .tippercentin p:hover {
+        background-color: rgb(255, 255, 255);
+        cursor: pointer;
+    }
+
+
+
+    .additem {
+        border: 2px dashed white;
+        width: 95%;
+        padding: 10px;
+        border-radius: 15px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        margin: 10px 0px;
+    }
+
+    .additemrow {
+        display: flex;
+        justify-content: space-between;
+        width: 100%;
+    }
+
+    .empty {
+        width: 10%;
+    }
+
+    .additem button {
+        width: 100%;
+        padding: 10px;
+        border-radius: 15px;
+        border: none;
+        outline: none;
+        margin: 10px 0px;
+        align-self: center;
+        background-color: rgb(0, 0, 0);
+        color: white;
+        cursor: pointer;
+    }
+
+    .additem button:hover {
+        background-color: white;
+        color: black;
+    }
+
+
+    .bill {
+        background-color: white;
+        width: 500px;
+        margin: 20px 20px;
+        /* border-radius: 20px; */
+    }
+
+    .s1 {
+        display: flex;
+        justify-content: space-between;
+        padding: 10px;
+        border-bottom: 1px dashed rgb(178, 178, 178);
+        align-items: center;
+    }
+
+    .s1 label {
+        font-size: 18px;
+        margin-right: 20px;
+        font-weight: 500;
+    }
+
+    .s2 h2 {
+        text-align: center;
+        padding: 10px;
+    }
+
+    #allitems {
+        margin-bottom: 20px;
+    }
+</style>
+
+<body>
+    <h1>Tip Calculator</h1>
+    <div class="tipcont">
+        <div class="form">
+            <label>Customer Name</label>
+            <input type="text" placeholder="Enter Customer Name" id="customernameinput" onchange="changeName()" />
+            <label>No. of people</label>
+            <input type="number" placeholder="Enter No. of people" id="peopleinput" onchange="changePeople()" />
+
+            <div class="tippercentout">
+                <p class="head">Select Tip %</p>
+                <div class="tippercentin">
+                    <!-- 1 , 5 ,10 ,15 -->
+                    <p onclick="tippercenttoinput('1')">1%</p>
+                    <p onclick="tippercenttoinput('5')">5%</p>
+                    <p onclick="tippercenttoinput('10')">10%</p>
+                    <p onclick="tippercenttoinput('15')">15%</p>
+                </div>
+                <input type="number" placeholder="Type Custom Tip %" id="customtipinput" onchange="changetip()" />
+            </div>
+
+            <div class="additem">
+                <p>Add Item</p>
+                <div class="additemrow">
+                    <input type="text" placeholder="Item Name" id="itemnameinput" />
+                    <p class="empty"></p>
+                    <input type="number" placeholder="Item Quantity" id="itemqtyinput" />
+                </div>
+                <input type="number" placeholder="Item Price" id="itempriceinput" />
+                <button onclick="addItem()">Add</button>
+            </div>
+        </div>
+        <div class="bill">
+            <div class="s1">
+                <label>Customer Name</label>
+                <p id="nameval">-</p>
+            </div>
+
+            <div class="s1">
+                <label>Number of People</label>
+                <p id="peopleval">-</p>
+            </div>
+
+            <div class="s2">
+                <h2>Items</h2>
+                <div id="allitems">
+                    <!-- <div class="s1">
+                     
+                    </div>
+                 -->
+                </div>
+            </div>
+
+            <div class="s1">
+                <p>Bill Amount</p>
+                <p id="billamt">Rs 0</p>
+            </div>
+
+            <div class="s1">
+                <p>Tip %</p>
+                <p id="tipval">0 %</p>
+            </div>
+
+            <div class="s1">
+                <label>Total Amount</label>
+                <p id="totalamount">Rs 0</p>
+            </div>
+
+        </div>
+    </div>
+</body>
+
+<script>
+    let customernameinput = document.getElementById("customernameinput");
+    let peopleinput = document.getElementById("peopleinput");
+    let customtipinput = document.getElementById("customtipinput");
+    let itemnameinput = document.getElementById("itemnameinput");
+    let itemqtyinput = document.getElementById("itemqtyinput");
+    let itempriceinput = document.getElementById("itempriceinput");
+    let billamt = document.getElementById("billamt");
+    let totalamount = document.getElementById("totalamount");
+
+    const changeName = () => {
+        let nameval = document.getElementById("nameval");
+        if (customernameinput.value == "") {
+            nameval.innerHTML = "-";
+        }
+        else {
+            nameval.innerHTML = customernameinput.value;
+            calculatetotal()
+        }
+    }
+    const changePeople = () => {
+        let peopleval = document.getElementById("peopleval");
+        if (peopleinput.value == "") {
+            peopleval.innerHTML = "-";
+
+        }
+        else {
+            peopleval.innerHTML = peopleinput.value;
+            calculatetotal()
+
+        }
+    }
+
+    const tippercenttoinput = (tipval) => {
+        customtipinput.value = tipval;
+        changetip();
+    }
+
+    const changetip = () => {
+        let tip = document.getElementById("tipval");
+        if (customtipinput.value == "") {
+            tip.innerHTML = "0 %";
+        }
+        else {
+            tip.innerHTML = customtipinput.value + "%";
+            // calculatetotal();
+            calculatetotal()
+
+        }
+    }
+
+
+    const itemarray = [];
+
+    const addItem = () => {
+        let itemname = itemnameinput.value;
+        let itemqty = itemqtyinput.value;
+        let itemprice = itempriceinput.value;
+
+        if (itemname == "" || itemqty == "" || itemprice == "") {
+            alert("Please fill all the fields");
+        }
+        else {
+            let item = {
+                name: itemname,
+                qty: itemqty,
+                price: itemprice
+            }
+
+            itemarray.push(item);
+            console.log(itemarray);
+            itemnameinput.value = "";
+            itemqtyinput.value = "";
+            itempriceinput.value = "";
+            showitemarrayinbill();
+        }
+    }
+
+    const showitemarrayinbill = () => {
+        let allitems = document.getElementById("allitems");
+        allitems.innerHTML = "";
+        for (let i = 0; i < itemarray.length; i++) {
+            let item = itemarray[i];
+            let itemdiv = document.createElement("div");
+            itemdiv.classList.add("s1");
+            itemdiv.innerHTML = `
+<p>${item.qty}</p>
+<p>${item.name}</p>
+<p>${item.price}</p>
+`
+            allitems.appendChild(itemdiv);
+        }
+        calculatetotal()
+
+    }
+
+    const calculatetotal = () => {
+        let total = 0;
+        for (let i = 0; i < itemarray.length; i++) {
+            let item = itemarray[i];
+            total += item.qty * item.price;
+        }
+        billamt.innerHTML = "Rs " + total;
+        totalamount.innerHTML  = "RS "+ (total + (total*customtipinput.value/100))
+    }
+</script>
+
+</html>
